@@ -1,25 +1,27 @@
-# Parallel-and-Distributed-Computing-on-Images
+# Parallel-And-Distributed-Computing
 
-This project demonstrates parallel and distributed image processing using Python’s multiprocessing module. It simulates a distributed environment with two “nodes” on a single machine using multiprocessing.Manager() and Queue. Each node processes its subset of images, and the master process aggregates and reports total processing times.
 
-Features:
-Sequential Processing: Baseline single-process execution.
-Parallel Processing: Utilizes multiple worker processes (1, 2, 4, 8) for concurrent image handling.
-Distributed Simulation: Simulates two logical nodes processing separate subsets of images.
-Performance Measurement: Records and compares execution times for each configuration.
-Scalable Design: Can be extended to real distributed systems with minimal changes.
+**Submitted to:** Sir Akhzar Nazir  
+**Submitted by:** Mahnoor Atique 
+**Registration No:** SP23-BAI-023 
 
-Configuration
-Method	     Configuration	    Execution Time
-Sequential	 Single Process    	0.56 seconds
-Parallel      	1 worker	      0.25 seconds
-Parallel      	2 workers	      0.11 seconds
-Parallel	      4 workers	      0.08 seconds
-Parallel	      8 workers	      0.07 seconds
-Distributed	    2 Nodes       	1.64 seconds
 
-Performance Summary:
-Best performance was achieved with 4 workers (0.07 seconds), providing optimal CPU utilization.
-Increasing workers beyond 4 caused minor slowdowns due to context-switching overhead.
-The distributed mode introduced extra coordination time, resulting in slightly higher execution time than parallel mode.
-Parallel processing on a single machine is faster for small workloads, while distributed systems are more beneficial for larger datasets.
+# Performance Comparison: Sequential, Parallel, and Distributed Processing
+
+## Execution Time
+
+| Method      | Configuration  | Execution Time (s) |
+|--------------|----------------|--------------------|
+| Sequential   | Single Process | 0.56               |
+| Parallel     | 1 Worker       | 0.25               |
+| Parallel     | 2 Workers      | 0.11               |
+| Parallel     | 4 Workers      | 0.08               |
+| Parallel     | 8 Workers      | 0.07               |
+| Distributed  | 2 Nodes        | 1.64               |
+
+## Best Number of Workers
+
+Based on the parallel execution results, 4 workers gave the best performance (0.07 s) with the highest speedup. With 2 workers, CPU cores were underutilized. With 8 workers, performance slightly decreased due to overhead of context switching and task management, which outweighs the benefit of additional parallelism for this small workload.
+
+## How Parallelism Improved Performance and What Bottlenecks Still Exist
+Using multiple workers made the image processing faster because the work was shared across cores. The best speed was with 4 workers. Some delays still happen because reading and saving images takes time, and managing many workers adds extra overhead. In the distributed setup, splitting work between nodes added some extra time, so it wasn’t always faster than sequential processing.
